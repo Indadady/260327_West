@@ -44,14 +44,15 @@
             body { background-color: white; }
             .a4-page {
                 margin: 0;
-                padding: 5mm 8mm; /* 인쇄 짤림 방지를 위해 상하 패딩 축소 */
+                padding: 0; /* 내부 패딩을 없애고 @page 마진에 맡김 */
                 box-shadow: none;
                 width: 100%;
-                height: 280mm; /* 프린터 물리적 여백 고려해 높이를 280mm로 축소 (하단 짤림 완벽 방지) */
+                height: auto; /* 고정 높이 제거, 내용에 맞춰 자연스럽게 흐르도록 */
                 page-break-after: avoid;
                 page-break-before: avoid;
             }
             .no-print { display: none !important; }
+            
             /* 인쇄 시 배경색 강제 적용 */
             * {
                 -webkit-print-color-adjust: exact !important;
@@ -59,14 +60,31 @@
             }
             @page {
                 size: A4 portrait;
-                margin: 5mm; /* 프린터 물리적 최소 여백 확보 */
+                margin: 8mm 10mm; /* 상하 8mm, 좌우 10mm로 안정적인 프린터 여백 확보 */
             }
             
-            /* 인쇄 시 요소 간격 압축 */
-            h1 { font-size: 2.2rem !important; margin-bottom: 0.5rem !important; }
-            .mb-3 { margin-bottom: 0.5rem !important; }
-            .mb-1 { margin-bottom: 0.25rem !important; }
-            th, td { padding: 4px 6px !important; }
+            /* [핵심] 화면 배율 100%에서도 1장에 쏙 들어가도록 폰트 크기 자동 축소 */
+            .text-4xl { font-size: 1.8rem !important; line-height: 1.2 !important; }
+            .text-2xl { font-size: 1.25rem !important; }
+            .text-xl { font-size: 1.05rem !important; }
+            .text-lg { font-size: 0.95rem !important; line-height: 1.3 !important; }
+            .text-base { font-size: 0.85rem !important; }
+            
+            /* 커스텀 폰트 사이즈 인쇄용으로 조정 */
+            .highlight-text { font-size: 1rem !important; }
+            .meal-text { font-size: 0.95rem !important; }
+            
+            /* 요소 간 여백 대폭 압축하여 세로 길이 확보 */
+            .mb-3 { margin-bottom: 0.4rem !important; }
+            .mb-2 { margin-bottom: 0.2rem !important; }
+            .mb-1 { margin-bottom: 0.15rem !important; }
+            .p-3 { padding: 0.4rem 0.6rem !important; }
+            .py-2 { padding-top: 0.2rem !important; padding-bottom: 0.2rem !important; }
+            .py-3 { padding-top: 0.4rem !important; padding-bottom: 0.4rem !important; }
+            
+            /* 테이블 밀도 최적화 */
+            th { padding: 4px !important; font-size: 1rem !important; }
+            td { padding: 3px 5px !important; }
         }
         /* 어르신들을 위한 텍스트 강조 */
         .highlight-text { font-size: 1.15rem; font-weight: 700; color: #1e3a8a; }
